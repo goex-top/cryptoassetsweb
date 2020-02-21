@@ -1,8 +1,8 @@
 {
-  "name": "vue-admin-template",
+  "name": "crypto-asset-web",
   "version": "4.2.1",
-  "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
-  "author": "Pan <panfree23@gmail.com>",
+  "description": "web for crypto asset statistics",
+  "author": "goex-top@goex.top",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "0.18.1",
+    "echarts": "^4.6.0",
     "element-ui": "2.13.0",
     "js-cookie": "2.2.0",
     "normalize.css": "7.0.0",

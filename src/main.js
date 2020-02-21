@@ -8,6 +8,11 @@ import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
 
+// import ECharts from 'vue-echarts'
+// import 'echarts/lib/chart/bar'
+// import 'echarts/lib/chart/pie'
+
+
 import App from './App'
 import store from './store'
 import router from './router'
@@ -27,6 +32,9 @@ if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
+
+// Vue.component('v-chart', ECharts)
+
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })

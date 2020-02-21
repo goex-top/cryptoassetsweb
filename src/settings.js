@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'Crypto Asset Web',
 
   /**
    * @type {boolean} true | false

@@ -1,25 +1,31 @@
 <template>
   <div class="app-container">
     <el-table :data="assets" style="width: 100%;margin-top:30px;" border>
-      <el-table-column align="center" label="ID" width="80">
+      <el-table-column align="center" label="ID" width="60">
         <template slot-scope="scope">
           {{ scope.row.Id }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="平台" width="120">
+      <el-table-column align="center" label="平台" width="100">
         <template slot-scope="scope">
           {{ scope.row.exchange_name }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="USDT" width="220">
+      <el-table-column align="center" label="个性名" width="100">
+        <template slot-scope="scope">
+          {{ scope.row.nick_name }}
+        </template>
+      </el-table-column>
+
+      <el-table-column align="center" label="USDT" width="180">
         <template slot-scope="scope">
           {{ scope.row.value_usdt }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="BTC" width="220">
+      <el-table-column align="center" label="BTC" width="180">
         <template slot-scope="scope">
           {{ scope.row.value_btc }}
         </template>
@@ -75,6 +81,7 @@ import { get_assets, get_currencies } from '@/api/asset'
 
 const default_asset = {
   Id: '1',
+  nick_name: '我是大户',
   exchange_name: 'okex',
   value_usdt: '222',
   value_btc: '112',

@@ -52,7 +52,7 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: ['BTC', 'LTC', 'ETH', 'USDT', 'BNB']
         },
         series: [
           {
@@ -62,11 +62,11 @@ export default {
             radius: [15, 95],
             center: ['50%', '38%'],
             data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
+              { value: 320, name: 'BTC' },
+              { value: 240, name: 'LTC' },
+              { value: 149, name: 'ETH' },
+              { value: 100, name: 'USDT' },
+              { value: 59, name: 'BNB' }
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600

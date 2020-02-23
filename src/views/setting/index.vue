@@ -59,6 +59,9 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="个性名">
+          <el-input v-model="exchange.nick_name" placeholder="我是大户" />
+        </el-form-item>
         <el-form-item label="API Key">
           <el-input v-model="exchange.api_key" placeholder="3911702320" />
         </el-form-item>

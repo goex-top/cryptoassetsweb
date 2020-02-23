@@ -2,6 +2,8 @@
 
 > 基于 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 管理后台改制。
 
+![image](资产管理.gif)
+
 ## 配置
 
 ### 配置用户api Key

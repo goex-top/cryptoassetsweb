@@ -61,13 +61,8 @@ export default {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
-      console.log('this.chartData')
-      console.log(this.chartData)
     },
     setOptions(value) {
-            console.log('setOptions.value')
-      console.log(value)
-
       this.chart.setOption({
         title: {
           text: '资产走势',

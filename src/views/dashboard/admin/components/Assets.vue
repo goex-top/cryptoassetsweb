@@ -107,7 +107,6 @@ export default {
       this.list_loading = true
       const res = await get_assets()
       this.assets = res.data.list
-      console.log(this.assets)
       this.total = res.data.total
       this.list_loading = false
     },

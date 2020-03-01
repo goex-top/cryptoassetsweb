@@ -52,8 +52,6 @@ export default {
   methods: {
     handleSetLineChartData(type) {
       this.value = accountValue[type]
-      console.log('this.value')
-      console.log(this.value, type)
     }
   }
 }

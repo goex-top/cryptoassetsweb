@@ -12,7 +12,7 @@
     >
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.row.Id }}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column label="平台" width="110" align="center">
@@ -20,15 +20,21 @@
           <span>{{ scope.row.exchange_name }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="个性名" width="110" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.nick_name }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="API Key">
         <template slot-scope="scope">
-          {{ scope.row.public_key }}
+          {{ scope.row.api_key }}
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="创建时间" width="200">
         <template slot-scope="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.create_time }}</span>
+          <!-- <span>{{ parseTime2(scope.row.create_at) }}</span> -->
+          <span>{{ scope.row.create_at }}</span>
         </template>
       </el-table-column>
 
@@ -45,10 +51,10 @@
 
     <el-dialog
       :visible.sync="dialog_visible"
-      :title="新建"
+      :title="新建平台"
     >
       <el-form :model="exchange" label-width="80px" label-position="left">
-        
+
         <el-form-item label="平台">
           <el-select v-model="exchange.exchange_name" filterable placeholder="请选择">
             <el-option
@@ -59,6 +65,7 @@
             </el-option>
           </el-select>
         </el-form-item>
+
         <el-form-item label="个性名">
           <el-input v-model="exchange.nick_name" placeholder="我是大户" />
         </el-form-item>
@@ -69,6 +76,10 @@
          <el-input v-model="exchange.sec_key" placeholder="3911702320" />
         </el-form-item>
 
+        <el-form-item label="Pass Key">
+         <el-input v-model="exchange.pass_key" placeholder="3911702320" />
+        </el-form-item>
+
       </el-form>
       <div style="text-align:right;">
         <el-button
@@ -77,59 +88,71 @@
         >取消</el-button>
         <el-button type="primary" @click="confirm_adding">确认</el-button>
       </div>
+
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
-// import { delete_key } from '@/api/setting'
+import { getSetting, addSetting, deleteSetting, getSupport} from '@/api/setting'
+import { parseTime2 } from '@/utils/index'
 
 export default {
   data() {
     return {
       dialog_visible: false,
-      list: null,
+      list: [],
       listLoading: true,
       exchange:{},
-      options: [{
-          value: 'okex.com',
-          label: 'OKEx'
-        }, {
-          value: 'huobi.com',
-          label: 'Huobi'
-        }, {
-          value: 'binance.com',
-          label: 'Binance'
-        }],
-        value: ''
+      options: [],
+      value: ''
     }
   },
   created() {
+    this.fetchSupport()
     this.fetchData()
   },
   methods: {
-    fetchData() {
+    fetchSupport() {
       this.listLoading = true
-      getList().then(response => {
-        this.list = response.data.items
+      getSupport().then(response => {
+        var list = response.data
+        for (var i = 0; i < list.length; i++) {
+          this.options.push({
+            value: list[i],
+            label: list[i]
+          })
+        }
         this.listLoading = false
       })
     },
+    fetchData() {
+      getSetting().then(response => {
+        for (var i = 0; i < response.data.length; i++) {
+          var data = response.data[i]
+          this.list.push({
+            id: data.ID,
+            exchange_name:data.exchange_name,
+            nick_name:data.nick_name,
+            api_key:data.api_key,
+            create_at:parseTime2(data.CreatedAt)
+          })
+        }
+      })
+    },
     handle_add_exchange() {
-      // this.exchange = Object.assign({}, defaultSetting)
       this.dialog_visible = true
     },
 
-    handle_delete_key({ $Id, row }) {
-      this.$confirm('确认要删除?', 'Warning', {
+    handle_delete_key({ $id, row }) {
+      this.$confirm('确认要删除 [' + row.exchange_name + ' ] ?', 'Warning', {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async() => {
-          await delete_key(row.Id)
-          this.list.splice($Id, 1)
+          await deleteSetting(row.id)
+          this.list.splice($id, 1)
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -141,15 +164,16 @@ export default {
     },
 
     async confirm_adding() {
-
-        var exchange = {
-          exchange_name: this.exchange.exchange_name,
-          api_key: this.exchange.api_key,
-          sec_key: this.exchange.sec_key
-        }
-        const { data } = await add_exchange(exchange)
-        this.exchange = data
-        this.list.push(this.exchange)
+      var exchange = {
+        exchange_name: this.exchange.exchange_name,
+        nick_name:this.exchange.nick_name,
+        api_key: this.exchange.api_key,
+        sec_key: this.exchange.sec_key,
+        pass_key: this.exchange.pass_key
+      }
+      const { data } = await addSetting(exchange)
+      this.exchange.id = data.ID
+      this.list.push(this.exchange)
 
       const exchange_name = this.exchange.exchange_name
       const api_key = this.exchange.api_key
@@ -159,12 +183,10 @@ export default {
         dangerouslyUseHTMLString: true,
         message: `
             <div>平台: ${exchange_name}</div>
-   	    <div>API Key: ${api_key}</div>
+   	        <div>API Key: ${api_key}</div>
        `,
         type: 'success'
       })
-
-
 
     }
   }

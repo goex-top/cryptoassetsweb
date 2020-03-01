@@ -43,6 +43,12 @@ export function parseTime(time, cFormat) {
   return time_str
 }
 
+export function parseTime2(s) {
+  var slice = s.split(".")
+  const time_str = slice[0].replace("T", " ")
+ return time_str
+}
+
 /**
  * @param {number} time
  * @param {string} option

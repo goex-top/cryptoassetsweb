@@ -27,14 +27,15 @@ import BarChart from './components/BarChart'
 import PieChart from './components/PieChart'
 import Assets from './components/Assets'
 import PanelGroup from './components/PanelGroup'
+import { getAccount } from '@/api/asset'
 
 
-const accountValue = {
-  BTC: [100, 120, 161, 134, 105, 160, 165],
-  USDT: [200, 192, 120, 144, 160, 130, 140],
-  USD: [120, 90, 100, 138, 142, 130, 130],
-  CNY: [130, 140, 141, 142, 145, 150, 160]
-}
+// const accountValue = {
+//   BTC: [100, 120, 161, 134, 105, 160, 165],
+//   USDT: [200, 192, 120, 144, 160, 130, 140],
+//   USD: [120, 90, 100, 138, 142, 130, 130],
+//   CNY: [130, 140, 141, 142, 145, 150, 160]
+// }
 
 export default {
   name: 'DashboardAdmin',
@@ -46,12 +47,36 @@ export default {
   },
   data() {
     return {
-      value: accountValue.USDT
+      accountValue:{BTC:[], USDT:[], USD:[], CNY:[]},
+      value: []
     }
+  },
+  created() {
+    this.get_account()
   },
   methods: {
     handleSetLineChartData(type) {
-      this.value = accountValue[type]
+      console.log("type:"+type)
+      this.value = this.accountValue[type]
+    },
+    async get_account() {
+      const res = await getAccount()
+      var accountHistory = res.data
+      var BTC = []
+      var USDT = []
+      var USD = []
+      var CNY = []
+      for (var i = 0; i < accountHistory.length; i++) {
+        BTC.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].btc})
+        USDT.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].usdt})
+        USD.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].usd})
+        CNY.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].cny})
+      }
+      this.accountValue.BTC = BTC
+      this.accountValue.USDT = USDT
+      this.accountValue.USD = USD
+      this.accountValue.CNY = CNY
+      this.handleSetLineChartData('USDT')
     }
   }
 }

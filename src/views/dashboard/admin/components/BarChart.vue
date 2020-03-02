@@ -6,6 +6,7 @@
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 import resize from './mixins/resize'
+import { parseTime2 } from '@/utils/index'
 
 
 export default {
@@ -63,6 +64,16 @@ export default {
       this.setOptions(this.chartData)
     },
     setOptions(value) {
+      var ts = []
+      var asset = []
+      for (var i = 0; i < value.length; i++) {
+        ts.push(parseTime2(value[i].time))
+        asset.push(value[i].value)
+      }
+      console.log(ts)
+      console.log(asset)
+      console.log(value)
+      
       this.chart.setOption({
         title: {
           text: '资产走势',
@@ -100,7 +111,7 @@ export default {
         },
         xAxis: [{
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ts,
           axisTick: {
             alignWithLabel: true
           }
@@ -121,17 +132,17 @@ export default {
           itemStyle: {
             normal: {
               color: 'rgba(0,191,183,1)',
-              barBorderRadius: 0,
-              label: {
-                show: true,
-                position: 'top',
-                formatter(p) {
-                  return p.value > 0 ? p.value : ''
-                }
-              }
+              barBorderRadius: 0
+              // label: {
+              //   show: true,
+              //   position: 'top',
+              //   formatter(p) {
+              //     return p.value > 0 ? p.value : ''
+              //   }
+              // }
             }
           },
-          data: value,
+          data: asset,
         },{
           name: '平均',
           type: 'line',
@@ -142,16 +153,16 @@ export default {
             normal: {
               color: 'rgba(255,144,128,1)',
               barBorderRadius: 0,
-              label: {
-                show: true,
-                position: 'top',
-                formatter(p) {
-                  return p.value > 0 ? p.value : ''
-                }
-              }
+              // label: {
+              //   show: true,
+              //   position: 'top',
+              //   formatter(p) {
+              //     return p.value > 0 ? p.value : ''
+              //   }
+              // }
             }
           },
-          data: value
+          data: asset
         }
         ]
       })

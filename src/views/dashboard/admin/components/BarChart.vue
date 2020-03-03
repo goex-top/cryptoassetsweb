@@ -22,7 +22,7 @@ export default {
     },
     height: {
       type: String,
-      default: '350px'
+      default: '450px'
     },
     autoResize: {
       type: Boolean,
@@ -42,6 +42,7 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
+        console.log('watch:chartData')
         this.setOptions(val)
       }
     }
@@ -70,9 +71,6 @@ export default {
         ts.push(parseTime2(value[i].time))
         asset.push(value[i].value)
       }
-      console.log(ts)
-      console.log(asset)
-      console.log(value)
       
       this.chart.setOption({
         title: {

@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-editor-container">
-    <panel-group @handleSetLineChartData="handleSetLineChartData" />
+    <panel-group :panel-data="panel_value" @handleSetLineChartData="handleSetLineChartData2" />
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
           <bar-chart :chart-data="value"/>
@@ -48,15 +48,15 @@ export default {
   data() {
     return {
       accountValue:{BTC:[], USDT:[], USD:[], CNY:[]},
-      value: []
+      value: [],
+      panel_value: {BTC:0, USDT:0, USD:0, CNY:0}
     }
   },
   created() {
     this.get_account()
   },
   methods: {
-    handleSetLineChartData(type) {
-      console.log("type:"+type)
+    handleSetLineChartData2(type) {
       this.value = this.accountValue[type]
     },
     async get_account() {
@@ -76,7 +76,11 @@ export default {
       this.accountValue.USDT = USDT
       this.accountValue.USD = USD
       this.accountValue.CNY = CNY
-      this.handleSetLineChartData('USDT')
+      this.handleSetLineChartData2('USDT')
+      this.panel_value.BTC = BTC[BTC.length-1].value
+      this.panel_value.USDT = USDT[USDT.length-1].value
+      this.panel_value.USD = USD[USD.length-1].value
+      this.panel_value.CNY = CNY[CNY.length-1].value
     }
   }
 }

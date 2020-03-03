@@ -9,7 +9,7 @@
           <div class="card-panel-text">
             BTC
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="BTC" :duration="1000" :decimals="8" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -22,7 +22,7 @@
           <div class="card-panel-text">
             USDT
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="USDT" :duration="1000" :decimals="4" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -35,7 +35,7 @@
           <div class="card-panel-text">
             USD
           </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="USD" :duration="1000" :decimals="4" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -48,7 +48,7 @@
           <div class="card-panel-text">
             CNY
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="CNY" :duration="1000" :decimals="4" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -62,9 +62,49 @@ export default {
   components: {
     CountTo
   },
+  props: {
+    className: {
+      type: String,
+      default: 'panelGroup'
+    },
+    panelData: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      BTC:0,
+      USDT:0,
+      USD:0,
+      CNY:0
+    }
+  },
+  watch: {
+    panelData: {
+      deep: true,
+      handler(val) {
+        this.handleSetPanelData(val)
+      }
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initPanel()
+    })
+  },
   methods: {
+    initPanel() {
+      this.handleSetPanelData(this.panelData)
+    },
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type)
+    },
+    handleSetPanelData(val) {
+      this.BTC = val.BTC
+      this.USDT = val.USDT
+      this.USD = val.USD
+      this.CNY = val.CNY
     }
   }
 }

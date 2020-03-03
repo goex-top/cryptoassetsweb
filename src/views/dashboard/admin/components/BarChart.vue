@@ -42,7 +42,6 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
-        console.log('watch:chartData')
         this.setOptions(val)
       }
     }
@@ -73,19 +72,19 @@ export default {
       }
       
       this.chart.setOption({
-        title: {
-          text: '资产走势',
-          x: 'center',
-          // top: '20',
-          textStyle: {
-            color: '#ff0000',
-            fontSize: '22'
-          },
-          subtextStyle: {
-            color: '#90979c',
-            fontSize: '16'
-          }
-        },
+        // title: {
+        //   text: '资产走势',
+        //   x: 'center',
+        //   // top: '20',
+        //   textStyle: {
+        //     color: '#ff0000',
+        //     fontSize: '22'
+        //   },
+        //   subtextStyle: {
+        //     color: '#90979c',
+        //     fontSize: '16'
+        //   }
+        // },
         tooltip: {
           trigger: 'axis',
           axisPointer: { // 坐标轴指示器，坐标轴触发有效

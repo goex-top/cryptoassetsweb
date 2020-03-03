@@ -30,13 +30,6 @@ import PanelGroup from './components/PanelGroup'
 import { getAccount } from '@/api/asset'
 
 
-// const accountValue = {
-//   BTC: [100, 120, 161, 134, 105, 160, 165],
-//   USDT: [200, 192, 120, 144, 160, 130, 140],
-//   USD: [120, 90, 100, 138, 142, 130, 130],
-//   CNY: [130, 140, 141, 142, 145, 150, 160]
-// }
-
 export default {
   name: 'DashboardAdmin',
   components: {
@@ -67,10 +60,10 @@ export default {
       var USD = []
       var CNY = []
       for (var i = 0; i < accountHistory.length; i++) {
-        BTC.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].btc})
-        USDT.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].usdt})
-        USD.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].usd})
-        CNY.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].cny})
+        BTC.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].btc.toFixed(8)})
+        USDT.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].usdt.toFixed(4)})
+        USD.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].usd.toFixed(4)})
+        CNY.push({time:accountHistory[i].CreatedAt, value:accountHistory[i].cny.toFixed(4)})
       }
       this.accountValue.BTC = BTC
       this.accountValue.USDT = USDT

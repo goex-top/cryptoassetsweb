@@ -14,10 +14,17 @@ export function getAsset() {
     })
 }
 
-export function getCoinList(id) {
+export function getExchangeSummary(id) {
     return request({
-        url: '/api/exchange_detail',
+        url: '/api/exchange_summary',
         method: 'get',
         params: { id }
+    })
+}
+
+export function getCoinList() {
+    return request({
+        url: '/api/coin_list',
+        method: 'get'
     })
 }

@@ -6,6 +6,7 @@
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme
 import resize from './mixins/resize'
+// import { getCoinList } from '@/api/asset'
 
 export default {
   mixins: [resize],
@@ -21,11 +22,23 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    pieData: {
+      type: Array,
+      required: true
     }
   },
   data() {
     return {
-      chart: null
+      chart: null,
+    }
+  },
+  watch: {
+    pieData: {
+      deep: true,
+      handler(val) {
+        this.setOptions(val)
+      }
     }
   },
   mounted() {
@@ -40,10 +53,20 @@ export default {
     this.chart.dispose()
     this.chart = null
   },
+  created() {
+
+  },
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
-
+      this.setOptions(this.pieData)
+    },
+    setOptions(data) {
+      var name = []
+      for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        name.push(element.name)
+      }
       this.chart.setOption({
         tooltip: {
           trigger: 'item',
@@ -52,7 +75,7 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['BTC', 'LTC', 'ETH', 'USDT', 'BNB']
+          data: name
         },
         series: [
           {
@@ -61,19 +84,13 @@ export default {
             roseType: 'radius',
             radius: [15, 95],
             center: ['50%', '38%'],
-            data: [
-              { value: 320, name: 'BTC' },
-              { value: 240, name: 'LTC' },
-              { value: 149, name: 'ETH' },
-              { value: 100, name: 'USDT' },
-              { value: 59, name: 'BNB' }
-            ],
+            data: data,
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }
         ]
       })
-    }
+    },
   }
 }
 </script>

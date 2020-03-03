@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { getAsset, getCoinList } from '@/api/asset'
+import { getAsset, getExchangeSummary } from '@/api/asset'
 
 export default {
   name: 'Assets',
@@ -123,7 +123,7 @@ export default {
     async handle_view_detail(scope) {
       this.exchange_name = scope.row.exchange_name
       this.dialog_visible = true
-      const res = await getCoinList(scope.row.id)
+      const res = await getExchangeSummary(scope.row.id)
       var list = []
       const data = res.data
       for (var i = 0; i < data.length; i++) {

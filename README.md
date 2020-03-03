@@ -4,7 +4,36 @@
 
 ![image](资产管理.gif)
 
+## 快速上手
+
+配合[后台](https://github.com/goex-top/cryptoassets)使用, https://github.com/goex-top/cryptoassets
+
 ## 配置
+
+前端端口为`8000`, 后端端口为`9000`
+
+用nginx代理配置如下
+```bash
+server {
+        listen 8001;
+        listen [::]:8001;
+
+        server_name localhost;
+        access_log /yourpath/cryptoassetsweb/dist/crypt.log;
+        charset utf-8;
+        location / {
+                root /yourpath/cryptoassetsweb/dist;
+                index index.html;
+                try_files $uri $uri/ /index.html;
+        }
+
+        location /prod-api/ {
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header Host $http_host;
+                proxy_pass http://127.0.0.1:9000/;
+        }
+}
+```
 
 ### 配置用户api Key
 

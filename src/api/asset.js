@@ -2,21 +2,21 @@ import request from '@/utils/request'
 
 export function getAccount() {
     return request({
-        url: '/api/asset_history',
+        url: '/asset_history',
         method: 'get'
     })
 }
 
 export function getAsset() {
     return request({
-        url: '/api/asset',
+        url: '/asset',
         method: 'get'
     })
 }
 
 export function getExchangeSummary(id) {
     return request({
-        url: '/api/exchange_summary',
+        url: '/exchange_summary',
         method: 'get',
         params: { id }
     })
@@ -24,7 +24,7 @@ export function getExchangeSummary(id) {
 
 export function getCoinList() {
     return request({
-        url: '/api/coin_list',
+        url: '/coin_list',
         method: 'get'
     })
 }

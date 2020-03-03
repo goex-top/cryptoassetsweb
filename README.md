@@ -10,7 +10,7 @@
 
 ## 配置
 
-前端端口为`8000`, 后端端口为`9000`
+后端端口为`9000`
 
 用nginx代理配置如下
 ```bash
@@ -27,10 +27,10 @@ server {
                 try_files $uri $uri/ /index.html;
         }
 
-        location /prod-api/ {
+        location /api {
                 proxy_set_header X-Forwarded-For $remote_addr;
                 proxy_set_header Host $http_host;
-                proxy_pass http://127.0.0.1:9000/;
+                proxy_pass http://127.0.0.1:9000/api;
         }
 }
 ```

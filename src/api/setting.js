@@ -3,14 +3,14 @@ import request from '@/utils/request'
 // settings
 export function getSetting() {
   return request({
-    url: '/api/setting',
+    url: '/setting',
     method: 'get'
   })
 }
 
 export function addSetting(data) {
   return request({
-    url: '/api/setting',
+    url: '/setting',
     method: 'post',
     data
   })
@@ -18,14 +18,14 @@ export function addSetting(data) {
 
 export function deleteSetting(id) {
     return request({
-        url: `/api/setting/${id}`,
+        url: `/setting/${id}`,
         method: 'delete'
     })
 }
   
 export function getSupport() {
     return request({
-      url: '/api/support',
+      url: '/support',
       method: 'get'
     })
   }

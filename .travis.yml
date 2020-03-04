@@ -6,6 +6,7 @@ install:
 script:
   - npm run build:prod 
   - cp README.md dist/
+  - cp 资产管理.gif dist/
 deploy:
   provider: pages
   skip_cleanup: true

@@ -1,6 +1,6 @@
 # Crypto Asset Web
 
-[![Build Status](https://www.travis-ci.org/goex-top/cryptoassetsweb.svg?branch=master)](https://www.travis-ci.org/goex-top/cryptoassetsweb)
+[![Build Status](https://www.travis-ci.com/goex-top/cryptoassetsweb.svg?branch=master)](https://www.travis-ci.com/goex-top/cryptoassetsweb)
 
 
 > 基于 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 管理后台改制。

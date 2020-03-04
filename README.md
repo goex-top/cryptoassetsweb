@@ -1,5 +1,8 @@
 # Crypto Asset Web
 
+[![Build Status](https://www.travis-ci.org/goex-top/cryptoassetsweb.svg?branch=master)](https://www.travis-ci.org/goex-top/cryptoassetsweb)
+
+
 > 基于 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 管理后台改制。
 
 ![image](资产管理.gif)
@@ -64,7 +67,7 @@ npm install --registry=https://registry.npm.taobao.org
 npm run dev
 ```
 
-浏览器访问 [http://localhost:9528](http://localhost:9528)
+浏览器访问 [http://localhost:9001](http://localhost:9001)
 
 ### 发布
 

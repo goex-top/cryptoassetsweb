@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
     <el-table v-loading="listLoading" :data="assets" style="width: 100%;margin-top:30px;" border>
-      <el-table-column align="center" label="ID" width="60">
+      <el-table-column v-if="hidenColumn" align="center" label="ID" width="60" >
         <template slot-scope="scope">
           {{ scope.row.id }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="平台" width="120">
+      <el-table-column v-if="hidenColumn" align="center" label="平台" width="120">
         <template slot-scope="scope">
           {{ scope.row.exchange_name }}
         </template>
@@ -25,7 +25,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="BTC估值" width="180">
+      <el-table-column v-if="hidenColumn" align="center" label="BTC估值" width="180" >
         <template slot-scope="scope">
           {{ scope.row.btc }}
         </template>
@@ -43,8 +43,9 @@
     </el-table>
 
     <el-drawer
-      :visible.sync="dialog_visible"
-      :title=exchange_name size='35%'
+      :visible.sync="dialogVisible"
+      :title=exchange_name 
+      size="dialogSize"
     >
     <div class="filter-container">
       <el-switch
@@ -54,7 +55,7 @@
       </el-switch>
     </div>
     <el-table :data="currencies" style="width: 100%;margin-top:30px;" border :default-sort = "{prop: 'id', order: 'descending',prop: 'usdt', order: 'descending',prop: 'btc', order: 'descending',prop: 'currency_name', order: 'descending',prop: 'free', order: 'descending',prop: 'frozen', order: 'descending'}">
-        <el-table-column align="center" label="ID" width="80" sortable prop="id">
+        <el-table-column v-if="hidenColumn" align="center" label="ID" width="80" sortable prop="id">
             <template slot-scope="scope">
             {{ scope.row.id }}
             </template>
@@ -102,16 +103,29 @@ export default {
   name: 'Assets',
   data() {
     return {
-      dialog_visible: false,
+      dialogVisible: false,
+      dialogSize: "35%",
       exchange_name: '',
       assets:[],
       currencies:[],
       listLoading: true,
       showValue: true,
+      hidenColumn: false,
     }
   },
   created() {
     this.get_assets()
+  },
+  mounted () {
+    window.addEventListener('resize', () => {
+      if (document.body.clientWidth < 900) {
+        this.hidenColumn = true
+        this.dialogSize = '40%'
+      } else {  
+        this.hidenColumn = false
+        this.dialogSize = '35%'
+      }
+    })
   },
   methods: {
     async get_assets() {
@@ -122,7 +136,7 @@ export default {
     },
     async handle_view_detail(scope) {
       this.exchange_name = scope.row.exchange_name
-      this.dialog_visible = true
+      this.dialogVisible = true
       const res = await getExchangeSummary(scope.row.id)
       var list = []
       const data = res.data
@@ -154,6 +168,7 @@ export default {
 
 .filter-container {
   padding-bottom: 10px;
+  margin-left: 30px;
 
   .filter-item {
     display: inline-block;

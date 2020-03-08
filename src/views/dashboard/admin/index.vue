@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-editor-container">
+    <github-corner class="github-corner" />
     <panel-group :panel-data="panel_value" @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
@@ -13,7 +14,9 @@
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="16">
+        <div class="table-wrapper">
           <assets />
+        </div>
       </el-col>
 
     </el-row>
@@ -21,6 +24,7 @@
 </template>
 
 <script>
+import GithubCorner from '@/components/GithubCorner'
 import BarChart from './components/BarChart'
 import PieChart from './components/PieChart'
 import Assets from './components/Assets'
@@ -31,6 +35,7 @@ import { getAccount, getCoinList } from '@/api/asset'
 export default {
   name: 'DashboardAdmin',
   components: {
+    GithubCorner,
     PanelGroup,
     PieChart,
     BarChart,
@@ -78,8 +83,6 @@ export default {
     },
 
     async get_CoinList() {
-      console.log("get_CoinList")
-
       const res = await getCoinList()
       var list = res.data
       list.sort(this.compare('value'))
@@ -107,8 +110,19 @@ export default {
   position: relative;
 }
 .chart-wrapper {
-    background: #fff;
-    padding: 16px 16px 0;
-    margin-bottom: 32px;
-  }
+  background: #fff;
+  padding: 16px 16px 0;
+  margin-bottom: 32px;
+}
+.table-wrapper {
+  background: #fff;
+  padding: 8px 8px 0;
+  margin-bottom: 16px;
+}
+.github-corner {
+  position: absolute;
+  top: 0px;
+  border: 0;
+  right: 0;
+}
 </style>

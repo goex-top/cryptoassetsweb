@@ -50,7 +50,7 @@
     </el-table>
 
     <el-dialog
-      :visible.sync="dialog_visible"
+      :visible.sync="dialogVisible"
       :title="新建平台"
     >
       <el-form :model="exchange" label-width="80px" label-position="left">
@@ -84,7 +84,7 @@
       <div style="text-align:right;">
         <el-button
           type="danger"
-          @click="dialog_visible = false"
+          @click="dialogVisible = false"
         >取消</el-button>
         <el-button type="primary" @click="confirm_adding">确认</el-button>
       </div>
@@ -100,7 +100,7 @@ import { parseTime2 } from '@/utils/index'
 export default {
   data() {
     return {
-      dialog_visible: false,
+      dialogVisible: false,
       list: [],
       listLoading: true,
       exchange:{},
@@ -141,7 +141,7 @@ export default {
       })
     },
     handle_add_exchange() {
-      this.dialog_visible = true
+      this.dialogVisible = true
     },
 
     handle_delete_key({ $id, row }) {
@@ -177,7 +177,7 @@ export default {
 
       const exchange_name = this.exchange.exchange_name
       const api_key = this.exchange.api_key
-      this.dialog_visible = false
+      this.dialogVisible = false
       this.$notify({
         title: '添加成功',
         dangerouslyUseHTMLString: true,

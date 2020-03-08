@@ -43,10 +43,10 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <!-- <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div> -->
+      <div class="tips">
+        <p style="margin-right:20px;">用户名与密码</p>
+        <p style="margin-right:20px;">在你的配置文件&nbsp[&nbspconfig.toml&nbsp]&nbsp中</p>
+      </div>
 
     </el-form>
   </div>
@@ -74,8 +74,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: 'password'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],

@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Crypto Asset Web',
+  title: '资产统计',
 
   /**
    * @type {boolean} true | false

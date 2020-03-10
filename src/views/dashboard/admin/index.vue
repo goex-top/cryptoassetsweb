@@ -50,15 +50,15 @@ export default {
     }
   },
   created() {
-    this.get_account()
-    this.get_CoinList()
+    this.getAccounts()
+    this.getCoinList()
   },
   methods: {
     handleSetLineChartData(type) {
       this.accountValue = this.accountAllValue[type]
     },
 
-    async get_account() {
+    async getAccounts() {
       const res = await getAccount()
       var accountHistory = res.data
       var BTC = []
@@ -82,7 +82,7 @@ export default {
       this.panel_value.CNY = CNY[CNY.length-1].value
     },
 
-    async get_CoinList() {
+    async getCoinList() {
       const res = await getCoinList()
       var list = res.data
       list.sort(this.compare('value'))

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-        <el-button type="primary" @click="handle_add_exchange">新建</el-button>
+        <el-button type="primary" @click="handleAddExchange">新建</el-button>
 
     <el-table
       v-loading="listLoading"
@@ -43,7 +43,7 @@
           <el-button
             type="danger"
             size="small"
-            @click="handle_delete_key(scope)"
+            @click="handleDeleteKey(scope)"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -86,7 +86,7 @@
           type="danger"
           @click="dialogVisible = false"
         >取消</el-button>
-        <el-button type="primary" @click="confirm_adding">确认</el-button>
+        <el-button type="primary" @click="confirmAdding">确认</el-button>
       </div>
 
     </el-dialog>
@@ -140,19 +140,20 @@ export default {
         }
       })
     },
-    handle_add_exchange() {
+    handleAddExchange() {
       this.dialogVisible = true
     },
 
-    handle_delete_key({ $id, row }) {
-      this.$confirm('确认要删除 [' + row.exchange_name + ' ] ?', 'Warning', {
+    handleDeleteKey({ row }) {
+      this.$confirm('确认要删除 [' + row.exchange_name + ' - ' + row.nick_name + ' ] ?', 'Warning', {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async() => {
           await deleteSetting(row.id)
-          this.list.splice($id, 1)
+          const index = this.list.indexOf(row)
+          this.list.splice(index, 1)
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -163,7 +164,7 @@ export default {
         })
     },
 
-    async confirm_adding() {
+    async confirmAdding() {
       var exchange = {
         exchange_name: this.exchange.exchange_name,
         nick_name:this.exchange.nick_name,
@@ -172,11 +173,12 @@ export default {
         pass_key: this.exchange.pass_key
       }
       const { data } = await addSetting(exchange)
-      this.exchange.id = data.ID
+      this.exchange.id = data.id
+      this.exchange.create_at = data.create_at
       this.list.push(this.exchange)
 
       const exchange_name = this.exchange.exchange_name
-      const api_key = this.exchange.api_key
+      const api_key = this.exchange.api_key.slice(0,8)
       this.dialogVisible = false
       this.$notify({
         title: '添加成功',

@@ -36,7 +36,7 @@
           <el-button
             type="primary"
             size="small"
-            @click="handle_view_detail(scope)"
+            @click="handleViewDetail(scope)"
           >查看</el-button>
         </template>
       </el-table-column>
@@ -114,7 +114,7 @@ export default {
     }
   },
   created() {
-    this.get_assets()
+    this.getAssets()
   },
   mounted () {
     window.addEventListener('resize', () => {
@@ -128,13 +128,13 @@ export default {
     })
   },
   methods: {
-    async get_assets() {
+    async getAssets() {
       this.listLoading = true
       const res = await getAsset()
       this.assets = res.data
       this.listLoading = false
     },
-    async handle_view_detail(scope) {
+    async handleViewDetail(scope) {
       this.exchange_name = scope.row.exchange_name
       this.dialogVisible = true
       const res = await getExchangeSummary(scope.row.id)

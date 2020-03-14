@@ -1,6 +1,20 @@
-# Crypto Asset Web
+<p align="center">
 
-[![Build Status](https://www.travis-ci.com/goex-top/cryptoassetsweb.svg?branch=master)](https://www.travis-ci.com/goex-top/cryptoassetsweb)
+  <a href="https://github.com/vuejs/vue">
+    <img src="https://img.shields.io/badge/vue-2.6.11-brightgreen.svg" alt="vue">
+  </a>
+  <a href="https://github.com/ElemeFE/element">
+    <img src="https://img.shields.io/badge/element--ui-2.13.0-brightgreen.svg" alt="element-ui">
+  </a>
+  <a href="https://github.com/goex-top/cryptoassetsweb/master/LICENSE">
+    <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
+  </a>
+  <a href="https://www.travis-ci.com/goex-top/cryptoassetsweb">
+    <img src="https://www.travis-ci.com/goex-top/cryptoassetsweb.svg?branch=master" alt="build status">
+  </a>
+</p>
+
+# Crypto Asset Web
 
 
 > 基于 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 管理后台改制。

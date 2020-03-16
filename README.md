@@ -1,5 +1,8 @@
 <p align="center">
+    <img src="https://raw.githubusercontent.com/goex-top/cryptoassetsweb/master/public/favicon.ico">
+</p>
 
+<p align="center">
   <a href="https://github.com/vuejs/vue">
     <img src="https://img.shields.io/badge/vue-2.6.11-brightgreen.svg" alt="vue">
   </a>
@@ -14,7 +17,7 @@
   </a>
 </p>
 
-# Crypto Asset Web
+# 资产显示
 
 
 > 基于 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 管理后台改制。

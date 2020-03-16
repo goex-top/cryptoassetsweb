@@ -9,6 +9,7 @@ script:
   - npm run build:prod 
   - cp README.md dist/
   - cp assets.gif dist/
+  - cp LICENSE dist/
 deploy:
   provider: pages
   skip_cleanup: true

@@ -22,7 +22,7 @@
 
 > 基于 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) 管理后台改制。
 
-![image](资产管理.gif)
+![image](https://raw.githubusercontent.com/goex-top/cryptoassetsweb/master/assets.gif)
 
 ## 快速上手
 

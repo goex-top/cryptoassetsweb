@@ -29,7 +29,7 @@
     "vuex": "3.4.0"
   },
   "devDependencies": {
-    "@babel/register": "7.9.0",
+    "@babel/register": "7.10.1",
     "@babel/core": "7.9.0",
     "@vue/cli-plugin-babel": "4.3.0",
     "@vue/cli-plugin-eslint": "^4.4.1",

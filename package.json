@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
-    "@babel/register": "7.10.1",
+    "@babel/register": "7.10.3",
     "@vue/cli-plugin-babel": "4.4.1",
     "@vue/cli-plugin-eslint": "^4.4.1",
     "@vue/cli-plugin-unit-jest": "4.4.1",
